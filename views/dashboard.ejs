@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Volunteer Dashboard</title>
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+    <nav class="bg-white shadow p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-emerald-600">NayePankh Dashboard</h1>
+        <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-600 transition-colors">Log Out</a>
+    </nav>
+
+    <main class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow">
+        <h2 class="text-2xl font-semibold mb-2">Welcome back, <%= user.name %>!</h2>
+        <p class="text-gray-600 mb-6">Current Profile Verification Status: 
+            <span class="px-2 py-1 rounded text-sm font-bold <%= user.status === 'Approved' ? 'bg-green-100 text-green-800' : user.status === 'Rejected' ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800' %>">
+                <%= user.status %>
+            </span>
+        </p>
+        
+        <hr class="mb-6">
+
+        <% if (user.status === 'Pending') { %>
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-4">
+                <h3 class="text-lg font-semibold text-amber-800 flex items-center gap-2">⏳ Application Under Review</h3>
+                <p class="text-amber-700 mt-2 text-sm leading-relaxed">
+                    Thank you for submitting your core profile info! Our administration panel is currently assessing your background in <strong class="underline"><%= user.skills || 'General Support' %></strong> for the <strong class="underline"><%= user.interestArea %></strong> track. We will update your structural access immediately following approval.
+                </p>
+            </div>
+
+        <% } else if (user.status === 'Approved') { %>
+            <div class="bg-green-50 border-l-4 border-green-500 p-5 rounded-r-lg mb-6">
+                <h3 class="text-xl font-bold text-green-800">🎉 Congratulations! You are Approved!</h3>
+                <p class="text-green-700 mt-2 text-sm leading-relaxed">
+                    Welcome officially to the NayePankh Foundation core team. Your application has passed review criteria and you are now authorized to download team assets and synchronize with campaign departments.
+                </p>
+            </div>
+            
+            <div class="bg-slate-50 border rounded-lg p-4 space-y-3">
+                <h4 class="font-semibold text-gray-800 text-base">Your Assigned Track Profiles:</h4>
+                <div class="grid grid-cols-2 gap-4 text-sm bg-white p-3 border rounded">
+                    <div>
+                        <span class="text-xs font-medium text-gray-400 block uppercase tracking-wider">Verified Skills</span>
+                        <span class="text-gray-700 font-medium"><%= user.skills %></span>
+                    </div>
+                    <div>
+                        <span class="text-xs font-medium text-gray-400 block uppercase tracking-wider">Campaign Unit</span>
+                        <span class="text-gray-700 font-medium"><%= user.interestArea %></span>
+                    </div>
+                </div>
+                <hr class="my-2">
+                <h5 class="text-sm font-semibold text-gray-700">📂 Workspace Toolkits & Links:</h5>
+                <div class="flex gap-3 pt-1">
+                    <a href="#" class="flex-1 bg-emerald-600 text-white text-center text-sm py-2 rounded font-medium hover:bg-emerald-700 transition-colors">Download Volunteer Handbook</a>
+                    <a href="#" class="flex-1 border border-emerald-600 text-emerald-600 text-center text-sm py-2 rounded font-medium hover:bg-emerald-50 transition-colors">Join Community Telegram Group</a>
+                </div>
+            </div>
+
+        <% } else if (user.status === 'Rejected') { %>
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mb-6">
+                <h3 class="text-lg font-semibold text-red-800">❌ Application Requires Adjustment</h3>
+                <p class="text-red-700 mt-2 text-sm leading-relaxed">
+                    Your previous selection details did not completely map to our open camp requirements. Please clean up your operational credentials below and execute an application sync update.
+                </p>
+            </div>
+
+            <h3 class="text-lg font-medium mb-4 text-gray-800">Update & Resubmit Profile Details</h3>
+            <form action="/volunteer/apply" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Core Technical or Professional Skills</label>
+                    <input type="text" name="skills" value="<%= user.skills || '' %>" placeholder="e.g. Teaching, Design, Excel" class="w-full border rounded p-2 mt-1 focus:ring-2 focus:ring-emerald-500 outline-none" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Primary Campaign Area Preference</label>
+                    <select name="interestArea" class="w-full border rounded p-2 mt-1 focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <option value="Education Distribution" <%= user.interestArea === 'Education Distribution' ? 'selected' : '' %>>Childhood Education Campaigns</option>
+                        <option value="Food Drive Campaigns" <%= user.interestArea === 'Food Drive Campaigns' ? 'selected' : '' %>>Food Security Initiatives</option>
+                        <option value="Health and Sanitation Hygiene" <%= user.interestArea === 'Health and Sanitation Hygiene' ? 'selected' : '' %>>Menstrual Hygiene Programs</option>
+                    </select>
+                </div>
+                <button class="w-full bg-emerald-600 text-white py-2 rounded font-semibold hover:bg-emerald-700 transition-colors">Submit Updated Application Profile</button>
+            </form>
+        <% } %>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Register - NayePankh Foundation</title>
+</head>
+<body class="bg-slate-50 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center text-emerald-600 mb-6">Join NayePankh Foundation</h2>
+        <% if(error) { %> <p class="text-red-500 text-sm mb-4 text-center"><%= error %></p> <% } %>
+        <form action="/register" method="POST" class="space-y-4">
+            <div><label class="block text-sm font-medium">Full Name</label><input type="text" name="name" required class="w-full border rounded p-2 mt-1"></div>
+            <div><label class="block text-sm font-medium">Email Address</label><input type="email" name="email" required class="w-full border rounded p-2 mt-1"></div>
+            <div><label class="block text-sm font-medium">Password</label><input type="password" name="password" required class="w-full border rounded p-2 mt-1"></div>
+            <div>
+                <label class="block text-sm font-medium">Account Designation Type</label>
+                <select name="role" class="w-full border rounded p-2 mt-1">
+                    <option value="volunteer">Volunteer Candidate</option>
+                    <option value="admin">NGO Administrator</option>
+                </select>
+            </div>
+            <button class="w-full bg-emerald-600 text-white py-2 rounded font-semibold hover:bg-emerald-700">Create Account</button>
+        </form>
+        <p class="text-sm text-center mt-4 text-gray-600">Already registered? <a href="/login" class="text-emerald-600 font-medium underline">Login here</a></p>
+    </div>
+</body>
+</html>
