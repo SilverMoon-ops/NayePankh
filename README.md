@@ -7,10 +7,6 @@ A full-stack Node.js web application built for the NayePankh Foundation internsh
 
 ---
 
-## 📸 Project Preview
-C:\Users\rahul\OneDrive\Documents\nayepankh-system\Project Previwe\Screenshot 2026-06-13 161237.png
-C:\Users\rahul\OneDrive\Documents\nayepankh-system\Project Previwe\Screenshot 2026-06-13 161401.png
-
 ### 👤 Volunteer Dashboard (Dynamic States)
 * **Approved Status Layout:** Displays custom welcome toolkits, community links, and handbook downloads once approved.
 * **Unique Registration Guard:** Real-time email validation prevents account duplication.
