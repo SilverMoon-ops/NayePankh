@@ -15,6 +15,10 @@ A full-stack Node.js web application built for the NayePankh Foundation internsh
 * Live metric cards track **Total Applicants**, **Approved Personnel**, and **Pending Decisions**.
 * One-click action buttons update volunteer statuses directly in MongoDB Atlas.
 
+* use for admin dashboard
+*  Email: admin@demo.com
+*  Password: Admin@1234
+
 ---
 
 ## ✨ Features Implemented
